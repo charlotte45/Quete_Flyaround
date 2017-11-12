@@ -6,14 +6,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class FlightType extends AbstractType
+class UserType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nbFreeSeats')->add('seatPrice')->add('takeOffTime')->add('publicationDate')->add('description')->add('wasDone')->add('departure')->add('arrival')->add('pilot')->add('plane');
+        $builder->add('userName')->add('firstName')->add('lastName')->add('email')->add('phoneNumber')->add('birthDate')->add('creationDate')->add('role')->add('note')->add('isACertifiedPilot')->add('isActive')->add('reviews');
     }
     
     /**
@@ -22,7 +22,7 @@ class FlightType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Wcs\CoavBundle\Entity\Flight'
+            'data_class' => 'Wcs\CoavBundle\Entity\User'
         ));
     }
 
@@ -31,7 +31,7 @@ class FlightType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'wcs_coavbundle_flight';
+        return 'wcs_coavbundle_user';
     }
 
 
