@@ -13,6 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
 class User
 {
     /**
+    * @ORM\ManyToMany(targetEntity="WCS\CoavBundle\Entity\Reservation", inversedBy="passengers")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $reservations;
+
+    /**
      * @ORM\OneToMany(targetEntity="Wcs\CoavBundle\Entity\Review", mappedBy="reviewAuthor")
      */
     private $reviewsAuthor;
@@ -26,11 +32,6 @@ class User
      * @ORM\OneToMany(targetEntity="Wcs\CoavBundle\Entity\Flight", mappedBy="pilot")
      */
     private $pilots;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Wcs\CoavBundle\Entity\Reservation", mappedBy="passenger")
-     */
-    private $passengers;
 
     /**
      * @var int
@@ -103,12 +104,6 @@ class User
      * @ORM\Column(name="note", type="smallint", nullable=true)
      */
     private $note;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Wcs\CoavBundle\Entity\Review", inversedBy="reviews")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $reviews;
 
     /**
      * @var bool
