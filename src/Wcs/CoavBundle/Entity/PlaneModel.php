@@ -12,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class PlaneModel
 {
+    public function __toString()
+    {
+        return $this->model . "-" . $this->manufacturer;
+    }
+
     /**
      * @var int
      *
@@ -60,7 +65,7 @@ class PlaneModel
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -132,7 +137,7 @@ class PlaneModel
     /**
      * Get cruiseSpeed
      *
-     * @return int
+     * @return integer
      */
     public function getCruiseSpeed()
     {
@@ -156,7 +161,7 @@ class PlaneModel
     /**
      * Get planeNbSeats
      *
-     * @return int
+     * @return integer
      */
     public function getPlaneNbSeats()
     {
@@ -180,51 +185,10 @@ class PlaneModel
     /**
      * Get isAvailable
      *
-     * @return bool
+     * @return boolean
      */
     public function getIsAvailable()
     {
         return $this->isAvailable;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->planes = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add plane
-     *
-     * @param \Wcs\CoavBundle\Entity\Flight $plane
-     *
-     * @return PlaneModel
-     */
-    public function addPlane(\Wcs\CoavBundle\Entity\Flight $plane)
-    {
-        $this->planes[] = $plane;
-
-        return $this;
-    }
-
-    /**
-     * Remove plane
-     *
-     * @param \Wcs\CoavBundle\Entity\Flight $plane
-     */
-    public function removePlane(\Wcs\CoavBundle\Entity\Flight $plane)
-    {
-        $this->planes->removeElement($plane);
-    }
-
-    /**
-     * Get planes
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPlanes()
-    {
-        return $this->planes;
     }
 }

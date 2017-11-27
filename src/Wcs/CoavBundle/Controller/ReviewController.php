@@ -6,6 +6,7 @@ use Wcs\CoavBundle\Entity\Review;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Review controller.
@@ -32,16 +33,28 @@ class ReviewController extends Controller
     }
 
     /**
-     * Finds and displays a review entity.
+     * Creates a new review entity.
      *
-     * @Route("/{id}", name="review_show")
-     * @Method("GET")
+     * @Route("/new", name="review_new")
+     * @Method({"GET", "POST"})
      */
-    public function showAction(Review $review)
+    public function newAction(Request $request)
     {
+        $review = new Review();
+        $form = $this->createForm('Wcs\CoavBundle\Form\ReviewType', $review);
+        $form->handleRequest($request);
 
-        return $this->render('review/show.html.twig', array(
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($review);
+            $em->flush();
+
+            return $this->redirectToRoute('review_show', array('id' => $review->getId()));
+        }
+
+        return $this->render('review/new.html.twig', array(
             'review' => $review,
+            'form' => $form->createView(),
         ));
     }
 }

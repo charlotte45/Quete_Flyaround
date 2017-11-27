@@ -12,8 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User
 {
+    public function __toString()
+    {
+        return $this->firstName . "-" . $this->lastName;
+    }
+
     /**
-    * @ORM\ManyToMany(targetEntity="WCS\CoavBundle\Entity\Reservation", inversedBy="passengers")
+    * @ORM\ManyToMany(targetEntity="Wcs\CoavBundle\Entity\Reservation", inversedBy="passengers")
     * @ORM\JoinColumn(nullable=false)
     */
     private $reservations;
@@ -119,11 +124,21 @@ class User
      */
     private $isActive;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->reviewsAuthor = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->usersRated = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pilots = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -339,35 +354,11 @@ class User
     /**
      * Get note
      *
-     * @return int
+     * @return integer
      */
     public function getNote()
     {
         return $this->note;
-    }
-
-    /**
-     * Set reviews
-     *
-     * @param integer $reviews
-     *
-     * @return User
-     */
-    public function setReviews($reviews)
-    {
-        $this->reviews = $reviews;
-
-        return $this;
-    }
-
-    /**
-     * Get reviews
-     *
-     * @return int
-     */
-    public function getReviews()
-    {
-        return $this->reviews;
     }
 
     /**
@@ -387,7 +378,7 @@ class User
     /**
      * Get isACertifiedPilot
      *
-     * @return bool
+     * @return boolean
      */
     public function getIsACertifiedPilot()
     {
@@ -411,18 +402,11 @@ class User
     /**
      * Get isActive
      *
-     * @return bool
+     * @return boolean
      */
     public function getIsActive()
     {
         return $this->isActive;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -457,74 +441,6 @@ class User
     public function getReservations()
     {
         return $this->reservations;
-    }
-
-    /**
-     * Add passenger
-     *
-     * @param \Wcs\CoavBundle\Entity\Reservation $passenger
-     *
-     * @return User
-     */
-    public function addPassenger(\Wcs\CoavBundle\Entity\Reservation $passenger)
-    {
-        $this->passengers[] = $passenger;
-
-        return $this;
-    }
-
-    /**
-     * Remove passenger
-     *
-     * @param \Wcs\CoavBundle\Entity\Reservation $passenger
-     */
-    public function removePassenger(\Wcs\CoavBundle\Entity\Reservation $passenger)
-    {
-        $this->passengers->removeElement($passenger);
-    }
-
-    /**
-     * Get passengers
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPassengers()
-    {
-        return $this->passengers;
-    }
-
-    /**
-     * Add pilot
-     *
-     * @param \Wcs\CoavBundle\Entity\Flight $pilot
-     *
-     * @return User
-     */
-    public function addPilot(\Wcs\CoavBundle\Entity\Flight $pilot)
-    {
-        $this->pilots[] = $pilot;
-
-        return $this;
-    }
-
-    /**
-     * Remove pilot
-     *
-     * @param \Wcs\CoavBundle\Entity\Flight $pilot
-     */
-    public function removePilot(\Wcs\CoavBundle\Entity\Flight $pilot)
-    {
-        $this->pilots->removeElement($pilot);
-    }
-
-    /**
-     * Get pilots
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPilots()
-    {
-        return $this->pilots;
     }
 
     /**
@@ -593,5 +509,39 @@ class User
     public function getUsersRated()
     {
         return $this->usersRated;
+    }
+
+    /**
+     * Add pilot
+     *
+     * @param \Wcs\CoavBundle\Entity\Flight $pilot
+     *
+     * @return User
+     */
+    public function addPilot(\Wcs\CoavBundle\Entity\Flight $pilot)
+    {
+        $this->pilots[] = $pilot;
+
+        return $this;
+    }
+
+    /**
+     * Remove pilot
+     *
+     * @param \Wcs\CoavBundle\Entity\Flight $pilot
+     */
+    public function removePilot(\Wcs\CoavBundle\Entity\Flight $pilot)
+    {
+        $this->pilots->removeElement($pilot);
+    }
+
+    /**
+     * Get pilots
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPilots()
+    {
+        return $this->pilots;
     }
 }

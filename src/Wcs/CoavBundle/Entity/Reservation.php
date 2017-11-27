@@ -12,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Reservation
 {
+    public function __toString()
+    {
+        return $this->nbReservedSeats . "-" . $this->passengers . "-" . $this->flight . "-" . $this->wasDone;
+    }
+
     /**
      * @var int
      *
@@ -36,7 +41,7 @@ class Reservation
     private $publicationDate;
 
     /**
-    * @ORM\ManyToMany(targetEntity="WCS\CoavBundle\Entity\User", mappedBy="reservations")
+    * @ORM\ManyToMany(targetEntity="Wcs\CoavBundle\Entity\User", mappedBy="reservations")
     * @ORM\JoinColumn(nullable=false)
     */
     private $passengers;
@@ -54,11 +59,18 @@ class Reservation
      */
     private $wasDone;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->passengers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -82,7 +94,7 @@ class Reservation
     /**
      * Get nbReservedSeats
      *
-     * @return int
+     * @return integer
      */
     public function getNbReservedSeats()
     {
@@ -114,54 +126,6 @@ class Reservation
     }
 
     /**
-     * Set passenger
-     *
-     * @param string $passenger
-     *
-     * @return Reservation
-     */
-    public function setPassenger($passenger)
-    {
-        $this->passenger = $passenger;
-
-        return $this;
-    }
-
-    /**
-     * Get passenger
-     *
-     * @return string
-     */
-    public function getPassenger()
-    {
-        return $this->passenger;
-    }
-
-    /**
-     * Set flight
-     *
-     * @param string $flight
-     *
-     * @return Reservation
-     */
-    public function setFlight($flight)
-    {
-        $this->flight = $flight;
-
-        return $this;
-    }
-
-    /**
-     * Get flight
-     *
-     * @return string
-     */
-    public function getFlight()
-    {
-        return $this->flight;
-    }
-
-    /**
      * Set wasDone
      *
      * @param boolean $wasDone
@@ -178,18 +142,11 @@ class Reservation
     /**
      * Get wasDone
      *
-     * @return bool
+     * @return boolean
      */
     public function getWasDone()
     {
         return $this->wasDone;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->passengers = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -199,7 +156,7 @@ class Reservation
      *
      * @return Reservation
      */
-    public function addPassenger(\WCS\CoavBundle\Entity\User $passenger)
+    public function addPassenger(\Wcs\CoavBundle\Entity\User $passenger)
     {
         $this->passengers[] = $passenger;
 
@@ -211,7 +168,7 @@ class Reservation
      *
      * @param \WCS\CoavBundle\Entity\User $passenger
      */
-    public function removePassenger(\WCS\CoavBundle\Entity\User $passenger)
+    public function removePassenger(\Wcs\CoavBundle\Entity\User $passenger)
     {
         $this->passengers->removeElement($passenger);
     }
@@ -225,4 +182,49 @@ class Reservation
     {
         return $this->passengers;
     }
+
+    /**
+     * Set flight
+     *
+     * @param \Wcs\CoavBundle\Entity\Flight $flight
+     *
+     * @return Reservation
+     */
+    public function setFlight(\Wcs\CoavBundle\Entity\Flight $flight)
+    {
+        $this->flight = $flight;
+
+        return $this;
+    }
+
+    /**
+     * Get flight
+     *
+     * @return \Wcs\CoavBundle\Entity\Flight
+     */
+    public function getFlight()
+    {
+        return $this->flight;
+    }
+
+    /**
+     * Get passenger
+     * @return string
+     */
+    public function getPassenger()
+    {
+        return $this->passengers;
+    }
+
+    /**
+     * @param string $passenger
+     * @return Reservation
+     */
+    public function setPassenger($passenger)
+    {
+        $this->passengers = $passenger;
+        return $this;
+    }
+
+
 }

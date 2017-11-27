@@ -12,6 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Flight
 {
+
+    public function __toString()
+    {
+        return $this->departure . "-" . $this->arrival;
+    }
+
     /**
      * @var int
      *
@@ -91,64 +97,22 @@ class Flight
      * @ORM\Column(name="wasDone", type="boolean")
      */
     private $wasDone;
-
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->flights = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set departure
-     *
-     * @param string $departure
-     *
-     * @return Flight
-     */
-    public function setDeparture($departure)
-    {
-        $this->departure = $departure;
-
-        return $this;
-    }
-
-    /**
-     * Get departure
-     *
-     * @return string
-     */
-    public function getDeparture()
-    {
-        return $this->departure;
-    }
-
-    /**
-     * Set arrival
-     *
-     * @param string $arrival
-     *
-     * @return Flight
-     */
-    public function setArrival($arrival)
-    {
-        $this->arrival = $arrival;
-
-        return $this;
-    }
-
-    /**
-     * Get arrival
-     *
-     * @return string
-     */
-    public function getArrival()
-    {
-        return $this->arrival;
     }
 
     /**
@@ -168,7 +132,7 @@ class Flight
     /**
      * Get nbFreeSeats
      *
-     * @return int
+     * @return integer
      */
     public function getNbFreeSeats()
     {
@@ -272,54 +236,6 @@ class Flight
     }
 
     /**
-     * Set pilot
-     *
-     * @param string $pilot
-     *
-     * @return Flight
-     */
-    public function setPilot($pilot)
-    {
-        $this->pilot = $pilot;
-
-        return $this;
-    }
-
-    /**
-     * Get pilot
-     *
-     * @return string
-     */
-    public function getPilot()
-    {
-        return $this->pilot;
-    }
-
-    /**
-     * Set plane
-     *
-     * @param string $plane
-     *
-     * @return Flight
-     */
-    public function setPlane($plane)
-    {
-        $this->plane = $plane;
-
-        return $this;
-    }
-
-    /**
-     * Get plane
-     *
-     * @return string
-     */
-    public function getPlane()
-    {
-        return $this->plane;
-    }
-
-    /**
      * Set wasDone
      *
      * @param boolean $wasDone
@@ -336,18 +252,11 @@ class Flight
     /**
      * Get wasDone
      *
-     * @return bool
+     * @return boolean
      */
     public function getWasDone()
     {
         return $this->wasDone;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->flights = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -383,4 +292,102 @@ class Flight
     {
         return $this->flights;
     }
+
+    /**
+     * Set departure
+     *
+     * @param \Wcs\CoavBundle\Entity\Terrain $departure
+     *
+     * @return Flight
+     */
+    public function setDeparture(\Wcs\CoavBundle\Entity\Terrain $departure)
+    {
+        $this->departure = $departure;
+
+        return $this;
+    }
+
+    /**
+     * Get departure
+     *
+     * @return \Wcs\CoavBundle\Entity\Terrain
+     */
+    public function getDeparture()
+    {
+        return $this->departure;
+    }
+
+    /**
+     * Set arrival
+     *
+     * @param \Wcs\CoavBundle\Entity\Terrain $arrival
+     *
+     * @return Flight
+     */
+    public function setArrival(\Wcs\CoavBundle\Entity\Terrain $arrival)
+    {
+        $this->arrival = $arrival;
+
+        return $this;
+    }
+
+    /**
+     * Get arrival
+     *
+     * @return \Wcs\CoavBundle\Entity\Terrain
+     */
+    public function getArrival()
+    {
+        return $this->arrival;
+    }
+
+    /**
+     * Set pilot
+     *
+     * @param \Wcs\CoavBundle\Entity\User $pilot
+     *
+     * @return Flight
+     */
+    public function setPilot(\Wcs\CoavBundle\Entity\User $pilot)
+    {
+        $this->pilot = $pilot;
+
+        return $this;
+    }
+
+    /**
+     * Get pilot
+     *
+     * @return \Wcs\CoavBundle\Entity\User
+     */
+    public function getPilot()
+    {
+        return $this->pilot;
+    }
+
+    /**
+     * Set plane
+     *
+     * @param \Wcs\CoavBundle\Entity\PlaneModel $plane
+     *
+     * @return Flight
+     */
+    public function setPlane(\Wcs\CoavBundle\Entity\PlaneModel $plane)
+    {
+        $this->plane = $plane;
+
+        return $this;
+    }
+
+    /**
+     * Get plane
+     *
+     * @return \Wcs\CoavBundle\Entity\PlaneModel
+     */
+    public function getPlane()
+    {
+        return $this->plane;
+    }
+
+
 }

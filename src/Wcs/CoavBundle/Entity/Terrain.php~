@@ -95,11 +95,19 @@ class Terrain
      */
     private $country;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->departures = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->arrivals = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -296,14 +304,6 @@ class Terrain
     public function getCountry()
     {
         return $this->country;
-    }
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->departures = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

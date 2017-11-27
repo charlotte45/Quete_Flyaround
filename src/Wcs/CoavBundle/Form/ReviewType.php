@@ -3,29 +3,17 @@
 namespace Wcs\CoavBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserType extends AbstractType
+class ReviewType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('userName')
-            ->add('firstName')
-            ->add('lastName')
-            ->add('email')
-            ->add('phoneNumber')
-            ->add('birthDate', BirthdayType::class)
-            ->add('creationDate')
-            ->add('role')
-            ->add('note')
-            ->add('isACertifiedPilot')
-            ->add('isActive');
+        $builder->add('text')->add('publicationDate')->add('note')->add('userRated')->add('reviewAuthor');
     }
     
     /**
@@ -34,7 +22,7 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Wcs\CoavBundle\Entity\User'
+            'data_class' => 'Wcs\CoavBundle\Entity\Review'
         ));
     }
 
@@ -43,7 +31,7 @@ class UserType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'wcs_coavbundle_user';
+        return 'wcs_coavbundle_review';
     }
 
 

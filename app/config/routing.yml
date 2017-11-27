@@ -10,10 +10,6 @@ wcs_coav_flight:
     resource: "@WcsCoavBundle/Controller/FlightController.php"
     type:     annotation
 
-wcs_coav_review:
-    resource: "@WcsCoavBundle/Controller/ReviewController.php"
-    type:     annotation
-
 wcs_coav_terrain:
     resource: "@WcsCoavBundle/Controller/TerrainController.php"
     type:     annotation
@@ -26,3 +22,10 @@ wcs_coav:
     resource: "@WcsCoavBundle/Resources/config/routing.yml"
     prefix:   /
 
+wcs_coav_listing:
+    resource: "@WcsCoavBundle/Controller/ListingController.php"
+    type:     annotation
+
+wcs_coav_review:
+    resource: "@WcsCoavBundle/Controller/ReviewController.php"
+    type:     annotation

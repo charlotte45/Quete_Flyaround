@@ -59,11 +59,18 @@ class Review
      */
     private $note;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->reviews = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -95,54 +102,6 @@ class Review
     }
 
     /**
-     * Set userRated
-     *
-     * @param string $userRated
-     *
-     * @return Review
-     */
-    public function setUserRated($userRated)
-    {
-        $this->userRated = $userRated;
-
-        return $this;
-    }
-
-    /**
-     * Get userRated
-     *
-     * @return string
-     */
-    public function getUserRated()
-    {
-        return $this->userRated;
-    }
-
-    /**
-     * Set reviewAuthor
-     *
-     * @param string $reviewAuthor
-     *
-     * @return Review
-     */
-    public function setReviewAuthor($reviewAuthor)
-    {
-        $this->reviewAuthor = $reviewAuthor;
-
-        return $this;
-    }
-
-    /**
-     * Get reviewAuthor
-     *
-     * @return string
-     */
-    public function getReviewAuthor()
-    {
-        return $this->reviewAuthor;
-    }
-
-    /**
      * Set publicationDate
      *
      * @param \DateTime $publicationDate
@@ -169,7 +128,7 @@ class Review
     /**
      * Set note
      *
-     * @param string $note
+     * @param integer $note
      *
      * @return Review
      */
@@ -183,18 +142,11 @@ class Review
     /**
      * Get note
      *
-     * @return string
+     * @return integer
      */
     public function getNote()
     {
         return $this->note;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->reviews = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -229,5 +181,53 @@ class Review
     public function getReviews()
     {
         return $this->reviews;
+    }
+
+    /**
+     * Set userRated
+     *
+     * @param \Wcs\CoavBundle\Entity\User $userRated
+     *
+     * @return Review
+     */
+    public function setUserRated(\Wcs\CoavBundle\Entity\User $userRated)
+    {
+        $this->userRated = $userRated;
+
+        return $this;
+    }
+
+    /**
+     * Get userRated
+     *
+     * @return \Wcs\CoavBundle\Entity\User
+     */
+    public function getUserRated()
+    {
+        return $this->userRated;
+    }
+
+    /**
+     * Set reviewAuthor
+     *
+     * @param \Wcs\CoavBundle\Entity\User $reviewAuthor
+     *
+     * @return Review
+     */
+    public function setReviewAuthor(\Wcs\CoavBundle\Entity\User $reviewAuthor)
+    {
+        $this->reviewAuthor = $reviewAuthor;
+
+        return $this;
+    }
+
+    /**
+     * Get reviewAuthor
+     *
+     * @return \Wcs\CoavBundle\Entity\User
+     */
+    public function getReviewAuthor()
+    {
+        return $this->reviewAuthor;
     }
 }
